@@ -124,7 +124,7 @@ for url_league in url_list:
 #change first column's name to 'Team'
 df.rename(columns = {u'STANDARD' : 'TEAM'}, inplace = True)
 
-#convert records type from object to numeric (integer)
+#convert column type from object to numeric (integer)
 df[['GF', 
      'A','SOG',
      'S','HG','KG',
