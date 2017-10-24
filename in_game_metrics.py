@@ -59,8 +59,7 @@ table_headers.append('LEAGUE')
 #skip header and find data row
 
 
-#create empty list for data
-
+#create empty list for data rows
 Data = []
 
 #for each table row
@@ -115,14 +114,10 @@ for url_league in url_list:
                 team_rows.append('Serie A')
             else:
                 team_rows.append('Bundesliga I')
-   
                     
         #Append each team matrix
             Data.append(team_rows)
-
-
-
-
+           
     #put the rows and headers into a dataframe
         df = pd.DataFrame(Data, columns = table_headers)
 
@@ -139,9 +134,7 @@ df[['GF',
      'YC','RC','F','OFF', 'SEASON']].apply(pd.to_numeric, downcast = 'integer')
 
 
-
-
-##Metric calculation
+##METRIC Calculation 
 
 #group by Team and Season for aggergation 
 dfGrouped = df.groupby(['TEAM','SEASON'])
@@ -169,3 +162,56 @@ df['YCPG'][df["LEAGUE"] <> "Bundesliga I"] = df[df["LEAGUE"] <> "Bundesliga I"][
 
 #Round up calculation by 2 decimal points
 df = df.round({'GPG': 2, 'SOGPG': 2, 'FPG': 2, 'RCPG': 2, 'YCPG': 2})
+
+
+#VISUALIZATION 
+#Set colors
+my_colors = list(islice(cycle(['#d78b8b', '#efb583', '#8aaec6', '#9ac59a']), None, len(df)))
+
+#Set aggergration by LEAUGE 
+dfGrouped = df.groupby(['LEAGUE'])
+ 
+#FPG Calculation 
+Fouls_Viz = dfGrouped['FPG'].mean()
+#Plot bar chart for FPG by league 
+BarChart = Fouls_Viz.plot(kind = 'bar', color = my_colors).set_ylabel('Average Fouls Per Game')
+#Plot frenquency distribution of FPG by league - broken down by color
+plt.hist(df[df["LEAGUE"]=="Premier League"]["FPG"].reset_index(drop=True), alpha=0.6, label="Premier League")
+plt.hist(df[df["LEAGUE"]=="La Liga"]["FPG"].reset_index(drop=True), alpha=0.6, label="La Liga")
+plt.hist(df[df["LEAGUE"]=="Serie A"]["FPG"].reset_index(drop=True), alpha=0.6, label="Serie A")
+plt.hist(df[df["LEAGUE"]=="Bundesliga I"]["FPG"].reset_index(drop=True), alpha=0.6, label="Bundesliga I")
+plt.legend(bbox_to_anchor=(1.05, 1), loc=2)
+plt.show()
+#Plot a normal distribution 
+df.hist('FPG')
+
+
+
+#GPG Calculation 
+Fouls_Viz = dfGrouped['GPG'].mean()
+#Plot bar chart for GPG by league 
+BarChart = Fouls_Viz.plot(kind = 'bar', color = my_colors).set_ylabel('Average Goals Per Game')
+#Plot frenquency distribution of FPG by league - broken down by color
+plt.hist(df[df["LEAGUE"]=="Premier League"]["GPG"].reset_index(drop=True), alpha=0.6, label="Premier League")
+plt.hist(df[df["LEAGUE"]=="La Liga"]["GPG"].reset_index(drop=True), alpha=0.6, label="La Liga")
+plt.hist(df[df["LEAGUE"]=="Serie A"]["GPG"].reset_index(drop=True), alpha=0.6, label="Serie A")
+plt.hist(df[df["LEAGUE"]=="Bundesliga I"]["GPG"].reset_index(drop=True), alpha=0.6, label="Bundesliga I")
+plt.legend(bbox_to_anchor=(1.05, 1), loc=2)
+plt.show()
+#Plot a normal distribution 
+df.hist('GPG')
+
+#SOGPG Calculation 
+Fouls_Viz = dfGrouped['SOGPG'].mean()
+#Plot bar chart for SOGPG by league 
+BarChart = Fouls_Viz.plot(kind = 'bar', color = my_colors).set_ylabel('Average Shots on Goal Per Game')
+#Plot frenquency distribution of FPG by league - broken down by color
+plt.hist(df[df["LEAGUE"]=="Premier League"]["SOGPG"].reset_index(drop=True), alpha=0.6, label="Premier League")
+plt.hist(df[df["LEAGUE"]=="La Liga"]["SOGPG"].reset_index(drop=True), alpha=0.6, label="La Liga")
+plt.hist(df[df["LEAGUE"]=="Serie A"]["SOGPG"].reset_index(drop=True), alpha=0.6, label="Serie A")
+plt.hist(df[df["LEAGUE"]=="Bundesliga I"]["SOGPG"].reset_index(drop=True), alpha=0.6, label="Bundesliga I")
+plt.legend(bbox_to_anchor=(1.05, 1), loc=2)
+plt.show()
+#Plot a normal distribution 
+df.hist('SOGPG')
+
