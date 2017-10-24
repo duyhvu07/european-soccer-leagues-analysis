@@ -1,1 +1,1 @@
-# european-soccer-leauges-analysis
+# european-soccer-leagues-analysis
