@@ -2,7 +2,7 @@
 
 ### 1. Objective 
 
-To determine the most "entertaining" soccer league in Europe in recent years through 3 criteria:
+To determine the most "entertaining" soccer league in Europe in recent years through three criteria:
 + In-game metrics (in_game_metrics.py) 
 
   * Goals per Game
@@ -15,7 +15,7 @@ To determine the most "entertaining" soccer league in Europe in recent years thr
   * How often a top team in a league lost to lower ranked team?
 + Attendance record 
 
-  * What is the percentage of people attending a game, given the stadium capacity?
+  * What is the average stadium occupancy for each league?
 
 ### 2. Metadata 
 
