@@ -1,6 +1,6 @@
 # European Soccer Leagues Analysis
 
-### 1. Objective 
+## Objective 
 
 To determine the most "entertaining" soccer league in Europe in recent years through three criteria:
 + In-game metrics **(in_game_metrics.py)** 
@@ -17,9 +17,9 @@ To determine the most "entertaining" soccer league in Europe in recent years thr
 
   * What is the average stadium occupancy for each league?
 
-### 2. Metadata 
+## Metadata 
 
-### 3. Data Sources
+## Data Sources
 + [FoxSoccer](http://www.foxsports.com/soccer/stats)
 + [Kaggle](https://www.kaggle.com/hugomathien/soccer)
 
